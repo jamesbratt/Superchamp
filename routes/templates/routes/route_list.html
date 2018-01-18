@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+{% endblock stylesheets %}
+{% block content %}
+<div class="container">
+	<h1>
+  		Route Explorer
+	</h1>
+	
+	<ol class="breadcrumb">
+  		<li><a href="/">Home</a></li>
+  		<li class="active">Routes</li>
+	</ol>
+
+	<div class="row">
+		<div class="col-md-12">
+			<a href="create" class="btn btn-primary">Create a Route</a>
+		</div>
+	</div>
+	<hr>
+	{% if object_list %}
+		{% for route in object_list %}
+			{% if forloop.first %}<div class="row">{% endif %}
+				<div class="col-md-4">
+			    	<div id="{{ route.id }}" data-polyline="{{ route.polyline | safe }}" class="thumbnail box box-solid">
+	          				<div class="route-map-wrapper">
+	       				    <div style="height:200px" id="route-{{ route.id }}-map" class="route-map">
+	   						</div>
+	  						</div>
+				      	<div class="caption">
+				        	<h3><a href="{{ route.id }}">{{ route.title }}</a> <small>{{ route.locality }}</small></h3>
+			        		<dl>
+				                <dt>Distance</dt>
+				                <dd>{{ route.distance }} km</dd>
+				                <dt>Elevation Gain</dt>
+				                <dd>{{ route.elevation_gain }} m</dd>
+	             			</dl>
+				        	<p><a href="{{ route.id }}" class="btn btn-primary" role="button">View Efforts</a></p>
+				      	</div>
+			    	</div>
+	        	</div>
+		    {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+		    {% if forloop.last %}</div>{% endif %}
+		{% endfor %}
+	{% else %}
+		<div class="row">
+			<div class="col-md-12">
+				<hr>
+		    	<div class="alert alert-warning" role="alert">
+		      		There are no routes!
+		    	</div>
+	    	</div>
+		</div>
+	{% endif %}
+</div>
+{% endblock content %}
+
+{% block scripts %}
+{{ super }}
+<script src="{% static 'leaflet/leaflet.js' %}"></script>
+<script src="{% static 'routes/js/list_route.js' %}"></script>
+{% endblock scripts %}

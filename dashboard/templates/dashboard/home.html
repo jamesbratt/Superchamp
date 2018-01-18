@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block stylesheets %}
+<!-- fullCalendar -->
+<link rel="stylesheet" href="{% static 'bower_components/fullcalendar/dist/fullcalendar.min.css' %}">
+<link rel="stylesheet" href="{% static 'bower_components/fullcalendar/dist/fullcalendar.print.min.css' %}" media="print">
+{% endblock stylesheets %}
+{% block content %}
+<div class="container">
+     <h1>
+       Dashboard
+     </h1>
+     <ol class="breadcrumb">
+       <li class="active">Dashboard</li>
+     </ol>
+   
+   	<div class="row">
+	    <div class="col-md-12">
+			<div class="jumbotron">
+		  		<h1>Welcome!</h1>
+		  		<p>Theres not much here yet...</p>
+		  		<p><a class="btn btn-primary btn-lg" href="routes">Find some routes</a></p>
+			</div>
+   		</div>
+   	</div>
+</div>
+{% endblock content %}

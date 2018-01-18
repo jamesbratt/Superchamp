@@ -1,0 +1,90 @@
+{% extends "dashboard-master.html" %}
+{% load staticfiles %}
+{% load imagekit %}
+{% block googletag %}
+<meta name="google-site-verification" content="3lEJbq5ruuvLQPuviNmRVuVrIUpu6pa7oOZv7vZ1mik" />
+{% endblock googletag %}
+{% block content %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'home/home.css' %}">
+{% endblock stylesheets %}
+
+<div id="banner" style="background: url({% static 'home/superchamp-banner.jpg' %}) no-repeat center center;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;" class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Participate in <span>local</span><br>Virtual <span>cycling</span> events</h1>
+    <!-- <p class="lead text-center">the platform for organising virtual cycling events and races</p> -->
+  </div>
+</div>
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div {% if message.tags == 'error' %}class="alert alert-danger"{% else %}class="alert alert-success"{% endif %} role="alert">
+      {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+<div class="container">
+  <div id="opener" class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="text-center" style="color:#EA1595">A Digital Gran Fondo</h2>
+      <p class="lead text-center">Superchamp lets any cyclist take part in or even create their own Tour De France style cycling event right on their own door step.</p>
+      <p class="lead text-center">Compete against your friends or other cyclists in your area, for fun and to help improve your fitness.</p>
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <a class="btn btn-primary btn-block" href="/events/" role="button">Explore Events</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row explain-block">
+    <div class="col-md-12">
+    <h2 class="text-center explain-heading">How it works</h2>
+  </div>
+    <div class="col-md-4">
+      <h3><img width="30" src="{% static "home/iconmonstr-magnifier-4-48.png" %}" alt=""> Find an event</h3>
+      <p>Register then sign-in to Superchamp and either join an existing race, or create your own.</p>
+    </div>
+    <div class="col-md-4">
+      <h3><img width="30" src="{% static "home/iconmonstr-time-10-48.png" %}" alt=""> Get on your bike</h3>
+      <p>Check the route for a stage you want to ride, then get out on the bike and go for it! Make sure to record your ride with a Garmin GPS device.</p>
+    </div>
+    <div class="col-md-4">
+      <h3><img width="30" src="{% static "home/iconmonstr-upload-17-48.png" %}" alt=""> Upload your time</h3>
+      <p>Just upload the .FIT file from your Garmin for the stage, so Superchamp can calculate your time.</p>
+    </div>
+  </div>
+
+  <div class="row explain-block">
+    <div class="col-md-12">
+    <h2 style="color:#EA1595" class="text-center">Be a competitor</h2>
+    <p style="margin-bottom:3em" class="lead text-center">Every event has two jersies to compete for</p>
+  </div>
+    <div class="col-md-4 offset-md-2">
+      <h3 class="text-center">Yellow Jersey</h3>
+      <p class="text-center">Go for glory and compete for the ultimate prize in cycling by aiming for the best overall time across the most stage finishes.</p>
+    </div>
+    <div class="col-md-4">
+      <h3 class="text-center">Green Jersey</h3>
+      <p class="text-center">Be the sprint champion and compete tactically by pushing yourself on certain route segments across all event stages.</p>
+    </div>
+  </div>
+
+</div>
+
+<div id="ender" class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="lead text-center">Join today and become part of the community</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-2 offset-lg-5 col-md-4 offset-md-4">
+      <a class="btn btn-primary btn-block" href="/account/register/" role="button">Get Started</a>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

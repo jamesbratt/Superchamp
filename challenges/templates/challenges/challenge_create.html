@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/timepicker/bootstrap-timepicker.min.css' %}">
+{% endblock stylesheets %}
+{% block content %}
+<div class="container">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<h1>
+	  		Create a Challenge
+		</h1>
+		
+		<ol class="breadcrumb">
+	  		<li><a href="/">Home</a></li>
+	  		<li><a href="/routes/{{route_id}}">Route</a></li>
+	  		<li class="active">Create Challenge</li>
+		</ol>
+	</section>
+
+    <!-- Main content -->
+    <section class="content">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+			<div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Set yourself a goal</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" method="post" action="">
+            {% csrf_token %}
+              <div class="box-body">
+                 <div class="form-group">
+                 	<p class="lead">Complete route:</p>
+                	<label class="hidden" for="{{ form.route.auto_id }}">{{ form.route.label }}</label>
+                  	{{ form.route }}
+              	</div>
+           		<div>{{ form.route.errors.as_text }}</div>
+              <div class="bootstrap-timepicker">
+                <div class="form-group">
+               	    <p class="lead">under a target time of:</p>
+                	<label class="hidden" for="{{ form.target_time.auto_id }}">{{ form.target_time.label }}</label>
+
+                  <div class="input-group">
+                  
+                    {{ form.target_time }}
+
+                    <div class="input-group-addon">
+                      <i class="fa fa-clock-o"></i>
+                    </div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+                <!-- /.form group -->
+              </div>
+              	<div>{{ form.target_time.errors.as_text }}</div>
+              	<div class="form-group">
+              		<p class="lead">between now and:</p>
+                	<label class="hidden" for="{{ form.end_date.auto_id }}">{{ form.end_date.label }}</label>
+                  	{{ form.end_date }}
+              	</div>
+              	<div>{{ form.end_date.errors.as_text }}</div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Create Challenge</button>
+              </div>
+            </form>
+          	</div>
+			</div>
+		</div>
+    </section>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+{{ super }}
+<script src="{% static 'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'challenges/js/challenge_create.js' %}"></script>
+{% endblock scripts %}

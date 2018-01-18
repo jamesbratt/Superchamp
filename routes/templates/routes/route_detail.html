@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+  <style>
+ 	#route-detail-map {
+		height: 300px
+	}
+  @media (max-width: 600px) {
+	#route-detail-map {
+		height: 200px
+	}
+  }
+  </style>
+{% endblock stylesheets %}
+{% block content %}
+<!-- Content Header (Page header) -->
+<div class="container">
+	<h1>
+  		{{ object.title }}
+	</h1>
+	
+	<ol class="breadcrumb">
+  		<li><a href="/">Home</a></li>
+  		<li><a href="/routes">Routes</a></li>
+  		<li class="active">{{ object.title }}</li>
+	</ol>
+
+	{% if messages %}
+	<div class="messages">
+	    {% for message in messages %}
+	    <div {% if message.tags == 'error' %}class="alert alert-danger"{% elif message.tags == 'warning' %}class="alert alert-warning"{% else %}class="alert alert-success"{% endif %} role="alert">
+	      {{ message|safe }}
+	    </div>
+	    {% endfor %}
+	</div>
+	{% endif %}
+	<div id="route-content" class="row">
+		<div class="col-md-12">
+			<ul class="list-inline">
+		  		<li><h4><strong>{{ object.distance }}<small>km</small></strong> Distance</h4></li>
+		  		<li><h4><strong>{{ object.elevation_gain }}<small>m</small></strong> Elevation Gain</h4></li>
+		  		<li><h4><strong>{{ object.min_elevation }}<small>m</small></strong> Min Elevation</h4></li>
+		  		<li><h4><strong>{{ object.max_elevation }}<small>m</small></strong> Max Elevation</h4></li>
+			</ul>		    
+	    </div>    
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="route-map-wrapper">
+				<a style="position:absolute;right:2em;top:1em;z-index:2000" href="download-gpx" class="btn btn-success btn-sm">Download Route</a>
+				<div id="route-detail-map" class="route-map"></div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			{% if latest_effort %}
+	           	<div id="container" data-challenge-id="{{ object.id }}" data-latest-effort-id="{{ latest_effort.id }}" style="width:100%; height:200px;"></div>
+	       	{% endif %}         					
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		{% if times %}
+		<div class="col-md-12">	
+        	<button class="btn btn-warning clear">Clear Comparisons</button>
+			<hr>
+	              <table class="table table-hover">
+	                <tbody><tr>
+                	  <th>User</th>
+	                  <th>Time</th>
+	                  <th>Average Speed km/h</th>
+	                  <th>Upload Date</th>
+	                  <th>Performance</th>
+	                  <th></th>
+	                </tr>
+	                {% for time in times|dictsortreversed:"created_date" %}
+	                <tr>
+	                  <td>{{time.user.username}}</td>
+	                  <td>{{time.duration_str}}</td>
+	                  <td>{{time.average_speed}}</td>
+	                  <td>{{time.created_date}}</td>
+	                  {% if time.performance < 0 %}
+	                  	<td style="color:#dd4b39"><strong>{{time.performance}} %</strong></td>
+	                  {% elif time.performance > 0 %}
+	                  	<td style="color:#00a65a"><strong>+{{time.performance}} %</strong></td>
+                  	  {% else %}
+                  	  	<td><strong>{{time.performance}} %</strong></td>
+	                  {% endif %}
+	                  <td>{% if time.id != latest_effort.id %}<button data-challenge-id="{{time.id}}" class="btn btn-xs btn-default compare">Compare</button>{% endif %}</td>
+	                </tr>
+	                {% endfor %}
+	              </tbody></table>
+		</div>
+		{% else %}
+		<div class="col-md-12">
+			<hr>
+	    	<div class="alert alert-warning" role="alert">
+	      		There are no efforts for this route!
+	    	</div>
+    	</div>
+		{% endif %}
+	</div>
+</div>
+{% endblock content %}
+{% block scripts %}
+{{ super }}
+<script>var routeId = '{{ object.id }}'</script>
+<script src="{% static 'leaflet/leaflet.js' %}"></script>
+<script src="{% static 'bower_components/highcharts/highcharts.js' %}"></script>
+<script src="{% static 'routes/js/route_detail.js' %}"></script>
+{% endblock scripts %}

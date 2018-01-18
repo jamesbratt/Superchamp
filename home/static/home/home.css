@@ -1,0 +1,106 @@
+#banner {
+  position: relative;
+  z-index:0;
+}
+.navbar {
+  z-index:1000
+}
+
+#video-background {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  background-size: cover;
+  overflow: hidden;
+}
+
+#banner h1, #banner p {
+  font-size: 3rem;
+  line-height: 1.3em;
+  color:#FFFFFF
+}
+
+#banner h1 span {
+  color:#ea1595
+}
+
+#opener {
+  margin:8em 0;
+}
+
+.explain-heading {
+  padding:3em 0;
+  padding-top:0;
+  padding-bottom:2em;
+}
+
+.explain-block {
+  margin-bottom:5em
+}
+
+#ender {
+  padding-bottom: 5em;
+  padding-top: 5em;
+}
+
+#featured-race {
+  height:300px;
+  margin-bottom:4em
+}
+
+#featured-inner {
+  margin-top:2em
+}
+
+#featured-inner h1, #featured-inner p {
+  color:#FFFFFF
+}
+
+#organise {
+  margin-bottom:8em
+}
+
+#organise img {
+  margin-bottom:1em
+}
+
+@media (max-width:600px)  {
+  .jumbotron {
+      padding: 2rem 0;
+  }
+  #banner h1 {
+    font-size: 2.3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .jumbotron {
+      padding: 3rem 0;
+  }
+}
+@media (min-width: 992px) {
+  .jumbotron {
+      padding: 3rem 0;
+  }
+}
+@media (min-width: 1200px) {
+  .jumbotron {
+      padding: 8rem 0;
+  }
+}
+@media (min-width: 1500px) {
+  .jumbotron {
+      padding: 10rem 0;
+  }
+  #banner h1 {
+    font-size: 4rem;
+  }
+  #featured-race {
+    height:500px;
+  }
+}

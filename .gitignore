@@ -1,0 +1,17 @@
+__pycache__
+*/__pycache__
+__pycache__/*
+*/__pycache__/*
+*.pyc
+*.sqlite3
+settings.py
+node_modules
+bower_components
+.sass-cache/
+superchampenv/
+/static
+/media
+/reports
+superchamp.sock
+.project
+.pydevproject
