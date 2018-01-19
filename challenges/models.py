@@ -19,6 +19,7 @@ class ChallengeTime(models.Model):
     performance = models.FloatField(default=None)
     data = JSONField()
     hit_target = models.BooleanField(default=False)
+    start_time = models.DateTimeField()
     created_date = models.DateTimeField('date published')
 
     def __str__(self):

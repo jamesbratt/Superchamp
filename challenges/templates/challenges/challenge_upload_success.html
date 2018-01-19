@@ -24,28 +24,20 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box">
-		            <div class="box-header">
-		              <h3 class="box-title">Challenges</h3>
-		            </div>
 		            <!-- /.box-header -->
 		            <div class="box-body table-responsive no-padding">
 		              <table class="table table-hover">
 		                <tbody><tr>
-		                  <th>Target Time</th>
 		                  <th>Uploaded Time</th>
-		                  <th>Average Speed</th>
-		                  <th>Goal Achieved</th>
+		                  <th>Average Speed km/h</th>
+		                  <th>Performance</th>
 		                  <th></th>
-		                </tr>
-		                {% for result in results %}
-		                  <td>{{result.target}}</td>
-		                  <td>{{result.upload.duration}}</td>
-		                  <td>{{result.upload.average_speed}}</td>
-		                  <td>{{result.achieved}}</td>
-		                  <td><a href="/routes/{{ result.route_id }}">View full results</a></td>
-		                </tr>
-		                {% endfor %}
 		                <tr>
+		                  <td>{{results.duration}}</td>
+		                  <td>{{results.average_speed}}</td>
+		                  <td>{{results.performance}}</td>
+		                  <td><a href="/routes/{{ results.route_id }}">View full results</a></td>
+		                </tr>
 		              </tbody></table>
 		            </div>
 		            <!-- /.box-body -->

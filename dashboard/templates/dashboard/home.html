@@ -1,27 +1,103 @@
-{% extends "base.html" %}
 {% load staticfiles %}
-{% block stylesheets %}
-<!-- fullCalendar -->
-<link rel="stylesheet" href="{% static 'bower_components/fullcalendar/dist/fullcalendar.min.css' %}">
-<link rel="stylesheet" href="{% static 'bower_components/fullcalendar/dist/fullcalendar.print.min.css' %}" media="print">
-{% endblock stylesheets %}
-{% block content %}
-<div class="container">
-     <h1>
-       Dashboard
-     </h1>
-     <ol class="breadcrumb">
-       <li class="active">Dashboard</li>
-     </ol>
-   
-   	<div class="row">
-	    <div class="col-md-12">
-			<div class="jumbotron">
-		  		<h1>Welcome!</h1>
-		  		<p>Theres not much here yet...</p>
-		  		<p><a class="btn btn-primary btn-lg" href="routes">Find some routes</a></p>
-			</div>
-   		</div>
-   	</div>
-</div>
-{% endblock content %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Superchamp - Like Strava, but way simpler</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'dashboard/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'dashboard/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'dashboard/simple-line-icons/css/simple-line-icons.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'dashboard/landing-page.min.css' %}" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+      <div class="container">
+        <a class="navbar-brand" href="/">Superchamp</a>
+        <a class="btn btn-primary" href="account/login">Sign In</a>
+      </div>
+    </nav>
+
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h1 class="mb-5">Like Strava, but way simpler</h1>
+          </div>
+          <div class="col-md-6 col-lg-4 col-xl-4 mx-auto">  
+              <div class="form-row">
+                  <a href="/routes" class="btn btn-block btn-lg btn-primary">View Cycling Routes</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Icons Grid -->
+    <section class="features-icons bg-light text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-compass m-auto text-primary"></i>
+              </div>
+              <h3>Find Cycle Routes</h3>
+              <p class="lead mb-0">And if you can't find any, then build your own</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-clock m-auto text-primary"></i>
+              </div>
+              <h3>Upload your Time</h3>
+              <p class="lead mb-0">Your stats are calculated for routes you've cycled</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+              <div class="features-icons-icon d-flex">
+                <i class="icon-graph m-auto text-primary"></i>
+              </div>
+              <h3>Compare Stats</h3>
+              <p class="lead mb-0">See how you compare to previous rides and other cyclists</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+            <p class="text-muted small mb-4 mb-lg-0">&copy; Superchamp 2018. All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+</html>

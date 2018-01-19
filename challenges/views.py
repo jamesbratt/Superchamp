@@ -4,8 +4,7 @@ import json
 import operator
 
 from django.shortcuts import render
-from django.urls import reverse
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -21,7 +20,7 @@ from .fitFileValidator import AnalytseFile
 from django.contrib.gis.geos import Point
 
 
-class TimeStats(LoginRequiredMixin, View):
+class TimeStats(View):
     
     def distance(self, point, ref):
         p = Point((point['longitude'], point['latitude']), srid=4326)
@@ -34,7 +33,7 @@ class TimeStats(LoginRequiredMixin, View):
             challengeTimeId = request.GET.get('challengeTimeId', '')
             payload = None
             
-            latest = ChallengeTime.objects.filter(route=self.kwargs['pk']).filter(user=request.user.id).latest('created_date')
+            latest = ChallengeTime.objects.filter(route=self.kwargs['pk']).latest('created_date')
             data = ChallengeTime.objects.get(pk=challengeTimeId)
             
             new_data = []
@@ -78,16 +77,19 @@ class UploadView(LoginRequiredMixin, FormView):
                 if diff is not None:
                     performance = round(100 * float(diff)/float(previous_time), 1)
 
-        new_time = ChallengeTime.objects.create(
+        ChallengeTime.objects.create(
             user=user,
             route=route,
             duration=uploaded_time,
             duration_str=time.strftime('%H:%M:%S', time.gmtime(uploaded_time)),
             average_speed=upload['average_speed'],
             created_date=datetime.datetime.now(),
+            start_time=upload['start_time'],
             performance=performance,
             data=upload['data']
         )
+        
+        return {'duration': time.strftime('%H:%M:%S', time.gmtime(uploaded_time)), 'route_id': route.id, 'performance': performance, 'user': user, 'average_speed': upload['average_speed']}
 
     def form_valid(self, form):
         route = form.cleaned_data['route']

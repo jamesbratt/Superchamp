@@ -1,9 +1,6 @@
 import json
 import gpxpy.gpx
-import time
 import datetime
-
-from django.db.models import Min
 
 from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
@@ -13,7 +10,6 @@ from django.views.generic import View
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.contrib import messages
 
 from django.http import HttpResponse, Http404, JsonResponse
 
