@@ -41,7 +41,7 @@
 	 	<!-- Collect the nav links, forms, and other content for toggling -->
 	 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	   		<ul class="nav navbar-nav">
-		        <li><a href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+		        <li><a href="{% url 'dashboard:dashboard' %}">{% if user.is_authenticated %}Dashboard{% else %}Home{% endif %}</a></li>
 		        <li><a href="{% url 'routes:list-routes' %}">Cycle Routes</a></li>
 		        <li><a href="{% url 'challenges:upload-data' %}">Upload Ride Data</a></li>
 		        {% if not user.is_authenticated %}

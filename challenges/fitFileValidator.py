@@ -52,7 +52,7 @@ class AnalytseFile():
         rideGeomBuffer = rideGeom.buffer(0.0005)
 
         # First check if the actual ride intersects with the
-        # ser route and return the intersected route as a linestring
+        # set route and return the intersected route as a linestring
         # in case the rider has taken a wrong turn
         # and had to go back on themselves
         CheckIntersects = rideGeomBuffer.intersection(raceRoute)
