@@ -74,12 +74,11 @@ class Activate(TemplateView):
         if profile.user.is_active == False:
             if timezone.now() > profile.key_expires:
                 messages.add_message(self.request, messages.ERROR, 'Your activation has expired, please register again.')
-            else: #Activation successful
+            else:
                 profile.user.is_active = True
                 profile.user.save()
                 messages.add_message(self.request, messages.INFO, 'Your account has been successfully activated. You can now <a href="/account/login/">sign in</a>!')
 
-        #If user is already active, simply display error message
         else:
             messages.add_message(self.request, messages.ERROR, 'This account has already been activated. Go ahead and <a href="/account/login/">sign in</a>!')
         return context

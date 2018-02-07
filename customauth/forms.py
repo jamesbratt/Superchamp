@@ -1,14 +1,16 @@
+import datetime
+import hashlib
+
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.crypto import get_random_string
-from .models import Profile
-import datetime, hashlib
-from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
-from django.template import Context
 from django.template.loader import render_to_string
+
+from .models import Profile
+
 
 class RegisterForm(UserCreationForm):
     request = None
@@ -42,7 +44,7 @@ class RegisterForm(UserCreationForm):
 
             expiry = datetime.datetime.strftime(datetime.datetime.now() + datetime.timedelta(days=2), "%Y-%m-%d %H:%M:%S")
             key = self.generate_activation_key(user.username)
-            profile = Profile.objects.create(user = user,
+            Profile.objects.create(user = user,
                                    activation_key = key,
                                    key_expires = expiry
                                    )
@@ -74,6 +76,7 @@ class RegisterForm(UserCreationForm):
         secret_key = get_random_string(20, chars)
         return hashlib.sha256((secret_key + username).encode('utf-8')).hexdigest()
 
+
 class AccountForm(forms.ModelForm):
     class Meta:
         model = User
@@ -85,7 +88,7 @@ class AccountForm(forms.ModelForm):
         self.fields['username'].widget.attrs={'class': 'form-control'}
         self.fields['email'].widget.attrs={'class': 'form-control'}
 
-# If you don't do this you cannot use Bootstrap CSS
+
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label="Username", max_length=30,
                                widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'username', 'placeholder': 'Username'}))

@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% block stylesheets %}
-  <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
-  <style>
- 	#route-detail-map {
-		height: 300px
-	}
-  @media (max-width: 600px) {
-	#route-detail-map {
-		height: 200px
-	}
-  }
-  </style>
+<link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+<style>
+    #route-detail-map {
+        height: 300px
+    }
+    @media (max-width: 600px) {
+        #route-detail-map {
+            height: 200px
+        }
+    }
+</style>
 {% endblock stylesheets %}
 {% block content %}
 <!-- Content Header (Page header) -->
@@ -30,7 +30,7 @@
 	<div class="messages">
 	    {% for message in messages %}
 	    <div {% if message.tags == 'error' %}class="alert alert-danger"{% elif message.tags == 'warning' %}class="alert alert-warning"{% else %}class="alert alert-success"{% endif %} role="alert">
-	      {{ message|safe }}
+            {{ message|safe }}
 	    </div>
 	    {% endfor %}
 	</div>
@@ -46,6 +46,7 @@
 	    </div>    
 	</div>
 </div>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -56,6 +57,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
@@ -67,34 +69,46 @@
 		<div class="col-md-12">	
         	<button class="btn btn-warning clear">Clear Comparisons</button>
 			<hr>
-	              <table class="table table-hover">
-	                <tbody><tr>
-                	  <th>User</th>
-	                  <th>Time</th>
-	                  <th>Average Speed km/h</th>
-	                  <th>Upload Date</th>
-	                  <th>Ride Date</th>
-	                  <th>Performance</th>
-	                  <th></th>
-	                </tr>
-	                {% for time in times|dictsortreversed:"created_date" %}
-	                <tr>
-	                  <td>{{time.user.username}}</td>
-	                  <td>{{time.duration_str}}</td>
-	                  <td>{{time.average_speed}}</td>
-	                  <td>{{time.created_date}}</td>
-	                  <td>{{time.start_time}}</td>
-	                  {% if time.performance < 0 %}
-	                  	<td style="color:#dd4b39"><strong>{{time.performance}} %</strong></td>
-	                  {% elif time.performance > 0 %}
-	                  	<td style="color:#00a65a"><strong>+{{time.performance}} %</strong></td>
-                  	  {% else %}
-                  	  	<td><strong>{{time.performance}} %</strong></td>
-	                  {% endif %}
-	                  <td>{% if time.id != latest_effort.id %}<button data-challenge-id="{{time.id}}" class="btn btn-xs btn-default compare">Compare</button>{% endif %}</td>
-	                </tr>
-	                {% endfor %}
-	              </tbody></table>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>User</th>
+                        <th>Time</th>
+                        <th>Average Speed km/h</th>
+                        <th>Upload Date</th>
+                        <th>Ride Date</th>
+                        <th>Performance</th>
+                        <th></th>
+                    </tr>
+                    {% for time in times|dictsortreversed:"created_date" %}
+                    <tr>
+                        <td>{{time.user.username}}</td>
+                        <td>{{time.duration_str}}</td>
+                        <td>{{time.average_speed}}</td>
+                        <td>{{time.created_date}}</td>
+                        <td>{{time.start_time}}</td>
+                        {% if time.performance < 0 %}
+                        <td style="color:#dd4b39">
+                            <strong>{{time.performance}} %</strong>
+                        </td>
+                        {% elif time.performance > 0 %}
+                        <td style="color:#00a65a">
+                            <strong>+{{time.performance}} %</strong>
+                        </td>
+                        {% else %}
+                        <td>
+                            <strong>{{time.performance}} %</strong>
+                        </td>
+                        {% endif %}
+                        <td>
+                            {% if time.id != latest_effort.id %}
+                            <button data-challenge-id="{{time.id}}" class="btn btn-xs btn-default compare">Compare</button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 		</div>
 		{% else %}
 		<div class="col-md-12">

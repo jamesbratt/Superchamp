@@ -4,47 +4,50 @@
 <div class="container">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-		<h1>
-	  		Upload Results
-		</h1>
+        <h1>
+            Upload Results
+        </h1>
 	</section>
 
-    <!-- Main content -->
-    <section class="content">
-		{% if messages %}
-		<div class="messages">
-		    {% for message in messages %}
-		    <div {% if message.tags == 'error' %}class="alert alert-danger"{% else %}class="alert alert-success"{% endif %} role="alert">
-		      {{ message }}
-		    </div>
-		    {% endfor %}
-		</div>
-		{% endif %}
-		{% if results %}
-		<div class="row">
-			<div class="col-md-12">
-				<div class="box">
-		            <!-- /.box-header -->
-		            <div class="box-body table-responsive no-padding">
-		              <table class="table table-hover">
-		                <tbody><tr>
-		                  <th>Uploaded Time</th>
-		                  <th>Average Speed km/h</th>
-		                  <th>Performance</th>
-		                  <th></th>
-		                <tr>
-		                  <td>{{results.duration}}</td>
-		                  <td>{{results.average_speed}}</td>
-		                  <td>{{results.performance}}</td>
-		                  <td><a href="/routes/{{ results.route_id }}">View full results</a></td>
-		                </tr>
-		              </tbody></table>
-		            </div>
-		            <!-- /.box-body -->
-	          	</div>
-			</div>
-		</div>
-		{% endif %}
-    </section>
+	<!-- Main content -->
+	<section class="content">
+        {% if messages %}
+        <div class="messages">
+        {% for message in messages %}
+            <div {% if message.tags=='error' %}class="alert alert-danger" {% else %}class="alert alert-success" {% endif %} role="alert">
+            {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+        {% if results %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>Uploaded Time</th>
+                                    <th>Average Speed km/h</th>
+                                    <th>Performance</th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>{{results.duration}}</td>
+                                    <td>{{results.average_speed}}</td>
+                                    <td>{{results.performance}}</td>
+                                    <td>
+                                        <a href="/routes/{{ results.route_id }}">View full results</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+	</section>
 </div>
 {% endblock content %}
