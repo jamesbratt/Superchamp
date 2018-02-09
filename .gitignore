@@ -8,10 +8,10 @@ settings.py
 node_modules
 bower_components
 .sass-cache/
-superchampenv/
+bikeloveenv/
 /static
 /media
 /reports
-superchamp.sock
+bikelove.sock
 .project
 .pydevproject
