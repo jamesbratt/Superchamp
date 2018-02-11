@@ -13,11 +13,17 @@
 	<section class="content">
         {% if messages %}
         <div class="messages">
-        {% for message in messages %}
-            <div {% if message.tags=='error' %}class="alert alert-danger" {% else %}class="alert alert-success" {% endif %} role="alert">
-            {{ message }}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
             </div>
-        {% endfor %}
+            {% else %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+            {% endif %}
+            {% endfor %}
         </div>
         {% endif %}
         {% if results %}
